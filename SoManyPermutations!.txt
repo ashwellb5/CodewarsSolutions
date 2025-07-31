@@ -1,0 +1,11 @@
+def permutations(s):
+    list2 = []
+    for x in s:
+        if len(s) == 1:
+            return x
+        else:
+            s2 = s.replace(x, "", 1)
+            list = permutations(s2)
+            for y in list:
+                list2.append(x + y)
+    return set(list2)
