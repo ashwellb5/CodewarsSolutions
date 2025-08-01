@@ -1,0 +1,24 @@
+def sum_of_intervals(intervals):
+    intervals_list = []
+    for x in intervals:
+        intervals_list.append([x[0], x[1]])
+    sum = 0
+    change = 1
+    while change != 0:
+        change = 0
+        temp_list = []
+        for x in intervals_list:
+            for y in intervals_list:
+                if x != y:
+                    if x[1] >= y[0] and x[1] <= y[1]:
+                        if x in intervals_list:
+                            index = intervals_list.index(x)
+                            intervals_list[index][0] = min(x[0], y[0])
+                            intervals_list[index][1] = max(x[1], y[1])
+                            intervals_list.remove(y)
+                            change += 1
+    intervals_list = list(set(map(tuple, intervals_list)))
+    for x in intervals_list:
+        sum += x[1] - x[0]
+    return sum
+        
