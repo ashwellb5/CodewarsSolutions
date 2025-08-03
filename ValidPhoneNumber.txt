@@ -1,0 +1,12 @@
+def valid_phone_number(phone_number):
+    valid_number = "(000) 000-0000"
+    new_number = ""
+    for x in phone_number:
+        if x.isdigit():
+            new_number += '0'
+        else:
+            new_number += x
+    if new_number == valid_number:
+        return True
+    else:
+        return False
