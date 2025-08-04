@@ -1,0 +1,34 @@
+def next_bigger(n):
+    str_n = str(n)
+    str_n = str_n[::-1]
+    i = 0
+    temp = -1
+    swap_index = -1
+    while i < len(str_n):
+        if temp == -1:
+            temp = str_n[i]
+        elif int(str_n[i]) < int(temp) and swap_index == -1:
+            swap_index = i
+        else:
+            temp = str_n[i]
+        i += 1
+    if swap_index == -1:
+        return -1
+    new_string = str_n[:swap_index + 1]
+    num_list = []
+    for x in new_string:
+        num_list.append(int(x))
+    swap_number = num_list[-1]
+    lowest_higher_num = 10
+    for x in num_list:
+        if x > swap_number and x < lowest_higher_num:
+            lowest_higher_num = x
+    index = num_list.index(lowest_higher_num)
+    temp = num_list[-1]
+    num_list[-1] = lowest_higher_num
+    num_list[index] = temp
+    str_n = str(n)
+    final_string = ""
+    for x in num_list[:-1]:
+        final_string += str(x)
+    return int(str(n)[:-swap_index-1] + str(num_list[-1]) + final_string)
