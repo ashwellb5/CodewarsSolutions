@@ -1,0 +1,13 @@
+def generate_hashtag(s):
+    word_list = []
+    hashtag = "#"
+    for x in s.split(" "):
+        if len(x) > 0:
+            temp_string = x.lower()
+            temp_string = temp_string[0].upper() + temp_string[1:]
+            word_list.append(temp_string)
+    for x in word_list:
+        hashtag += x
+    if len(hashtag) > 140 or len(hashtag) == 1:
+        return False
+    return hashtag
