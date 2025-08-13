@@ -1,0 +1,39 @@
+def sum_strings(x, y):
+    new_string = ""
+    carry = 0
+    i = 0
+    x = x[::-1]
+    y = y[::-1]
+    while i < max(len(x), len(y)):
+        if i < len(x) and i < len(y):
+            temp = int(x[i]) + int(y[i]) + carry
+            if temp > 9:
+                new_string += str(temp)[1]
+                carry = 1
+            else:
+                new_string += str(temp)
+                carry = 0
+        elif i >= len(x):
+            temp = int(y[i]) + carry
+            if temp > 9:
+                new_string += str(temp)[1]
+                carry = 1
+            else:
+                new_string += str(temp)
+                carry = 0
+        else:
+            temp = int(x[i]) + carry
+            if temp > 9:
+                new_string += str(temp)[1]
+                carry = 1
+            else:
+                new_string += str(temp)
+                carry = 0
+        i += 1
+    if carry != 0:
+        new_string += str(carry)
+    new_string = new_string[::-1].lstrip("0")
+    if len(new_string) == 0:
+        return "0"
+    else:
+        return new_string
