@@ -1,0 +1,16 @@
+def determinant(matrix):
+    sign = 1
+    index = 0
+    det = 0
+    for x in matrix[0]:
+        if len(matrix) == 1:
+            det = x
+        else:
+            temp_matrix = []
+            for y in matrix[1:]:
+                temp_row = y[:index] + y[index+1:]
+                temp_matrix.append(temp_row)
+            det += sign * matrix[0][index] * determinant(temp_matrix)
+            index += 1
+            sign = sign * -1
+    return det
