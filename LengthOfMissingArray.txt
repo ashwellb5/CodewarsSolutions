@@ -1,0 +1,14 @@
+def get_length_of_missing_array(array_of_arrays):
+    arrays = array_of_arrays
+    if None in arrays or [] in arrays:
+        return 0
+    arrays.sort(key = len)
+    temp = 0
+    for x in arrays:
+        if temp == 0:
+            temp = len(x)
+        elif len(x) == temp + 1:
+            temp = temp + 1
+        else:
+            return temp + 1
+    return temp
