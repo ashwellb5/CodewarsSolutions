@@ -1,0 +1,12 @@
+def josephus_survivor(n,k):
+    list = []
+    for i in range(n):
+        list.append(1 + (i * 1))
+    index = 0
+    temp = 0
+    while len(list) > 1:
+        index += k - 1
+        if index >= len(list):
+            index = index%len(list)
+        del list[index]
+    return list[0]
