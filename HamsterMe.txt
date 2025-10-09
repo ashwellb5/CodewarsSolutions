@@ -1,0 +1,24 @@
+def hamster_me(code, message):
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    code_list = []
+    i = 0
+    for x in code:
+        code_list.append(x)
+        j = alphabet.index(x)
+        j += 1
+        if j >= len(alphabet):
+            j = 0
+        while alphabet[j] not in code:
+            code_list[i] = code_list[i] + alphabet[j]
+            j += 1
+            if j >= len(alphabet):
+                j = 0
+        i += 1
+    print(code_list)
+    encoded_message = ""
+    for x in message:
+        for y in code_list:
+            if x in y:
+                encoded_message += y[0] + str(y.index(x) + 1)
+                break
+    return encoded_message
