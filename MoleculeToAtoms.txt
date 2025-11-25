@@ -1,0 +1,68 @@
+def parse_molecule(formula):
+    brackets = ["(", "[", "{", ")", "]", "}"]
+    formula += "!"
+    atom_dictionary = {
+        
+    }
+    letter = ""
+    i = 0
+    while i < len(formula):
+        if formula[i] in brackets:
+            j = brackets.index(formula[i])
+            i += 1
+            k = i
+            bracket_count = 0
+            bracket_index = 0
+            while bracket_index == 0:
+                if formula[k] == brackets[j + 3] and bracket_count == 0:
+                    bracket_index = k
+                elif formula[k] == brackets[j + 3] and bracket_count > 0:
+                    bracket_count -= 1
+                elif formula[k] == brackets[j]:
+                    bracket_count += 1
+                k += 1
+            new_formula = formula[i : bracket_index]
+            i = bracket_index
+            temp_dictionary = parse_molecule(new_formula)
+            i += 1
+            number = ""
+            if formula[i].isdigit():
+                number = formula[i]
+                i += 1
+                while formula[i].isdigit():
+                    number += formula[i]
+                    i += 1
+                for x in temp_dictionary:
+                    temp_dictionary[x] = temp_dictionary[x] * int(number)
+            for x in temp_dictionary:
+                if x in atom_dictionary.keys():
+                    atom_dictionary[x] += temp_dictionary[x]
+                else:
+                    atom_dictionary[x] = temp_dictionary[x]
+        elif formula[i].isupper():
+            element = formula[i]
+            number = ""
+            i += 1
+            if formula[i].islower():
+                element += formula[i]
+                i += 1
+            if formula[i].isdigit():
+                number = formula[i]
+                i += 1
+                while formula[i].isdigit():
+                    number += formula[i]
+                    i += 1
+                if element in atom_dictionary.keys():
+                    atom_dictionary[element] += int(number)
+                else:
+                    atom_dictionary[element] = int(number)
+            else:
+                if element in atom_dictionary.keys():
+                    atom_dictionary[element] += 1
+                else:
+                    atom_dictionary[element] = 1
+        if formula[i] == "!":
+            i += 1
+    return atom_dictionary
+            
+    
