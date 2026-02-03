@@ -1,0 +1,10 @@
+def presses(phrase):
+    keys = ["1","ABC2","DEF3","GHI4","JKL5","MNO6","PQRS7","TUV8","WXYZ9","*"," 0","#"]
+    button_presses = 0
+    for x in phrase:
+        if x.isalpha():
+            x = x.upper()
+        for i in keys:
+            if x in i:
+                button_presses += i.index(x)+1
+    return button_presses
