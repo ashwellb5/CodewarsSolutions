@@ -1,0 +1,26 @@
+def decomp(n):
+    number = 2
+    prime_factors = {
+        "2": 1
+    }
+    while number < n:
+        number+=1
+        temp_number = number
+        broke = False
+        while temp_number != 1:
+            for x in prime_factors:
+                if temp_number % int(x) == 0:
+                    prime_factors[x] += 1
+                    temp_number = int(temp_number/int(x))
+                    broke = True
+                    break
+            if not broke:
+                prime_factors[str(temp_number)] = 1
+                temp_number = 1
+    final_decomp = ""
+    for x in prime_factors:
+        final_decomp += x
+        if prime_factors[x] > 1:
+            final_decomp += "^" + str(prime_factors[x])
+        final_decomp += " * "
+    return final_decomp[:-3]
