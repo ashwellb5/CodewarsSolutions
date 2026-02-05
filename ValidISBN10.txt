@@ -1,0 +1,17 @@
+def valid_ISBN10(isbn): 
+    i = 0
+    sum = 0
+    if len(isbn) != 10:
+        return False
+    if "X" in isbn[9]:
+        sum += 100
+        isbn = isbn[:-1]
+    while i < len(isbn):
+        if isbn[i].isalpha():
+            return False
+        sum += int(isbn[i]) * (i+1)
+        i += 1
+    if sum % 11 == 0:
+        return True
+    else:
+        return False
