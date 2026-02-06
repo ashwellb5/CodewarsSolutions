@@ -1,0 +1,29 @@
+def find_uniq(arr):
+    new_arr = []
+    for x in arr:        
+        new_arr.append(''.join(sorted(x.lower())))
+    new_arr2 = [""]
+    index = 0
+    for x in new_arr:
+        for y in x:
+            if y not in new_arr2[index]:
+                new_arr2[index] += y
+        new_arr2.append("")
+        index+=1
+    new_arr2 = new_arr2[:-1]
+    new_arr2.sort()
+    unique_characters = ""
+    if new_arr2[0] == new_arr2[1]:
+        unique_characters = new_arr2[-1]
+    elif new_arr2[0] == "":
+        unique_characters = new_arr2[-1]
+    else:
+        unique_characters = new_arr2[0]
+    for x in arr:
+        match = True
+        for y in unique_characters:
+            if y not in x.lower():
+                match = False
+                break
+        if match:
+            return x
