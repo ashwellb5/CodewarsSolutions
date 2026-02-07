@@ -1,0 +1,13 @@
+def bingo(ticket,win):
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    mini_wins = 0
+    for x in ticket:
+        for y in x[0]:
+            if x[1] - 65 >= 0 and x[1] - 65 <=25:
+                if alphabet[x[1]-65] == y:
+                    mini_wins += 1
+                    break
+    if mini_wins >= win:
+        return "Winner!"
+    else:
+        return "Loser!"
