@@ -1,0 +1,13 @@
+def longest_repetition(chars):
+    consecutive = ["", 0]
+    temp = ["", 0]
+    for x in chars:
+        if x != temp[0]:
+            temp[0] = x
+            temp[1] = 1
+        else:
+            temp[1] += 1
+        if temp[1] > consecutive[1]:
+            consecutive[0] = x
+            consecutive[1] = temp[1]            
+    return (consecutive[0], consecutive[1])
