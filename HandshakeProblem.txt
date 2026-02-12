@@ -1,0 +1,7 @@
+def get_participants(handshakes):
+    farmers = 0
+    handshake_count = 0
+    while handshake_count < handshakes:
+        farmers += 1
+        handshake_count += farmers - 1
+    return farmers
