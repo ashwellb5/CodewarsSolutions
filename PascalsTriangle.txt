@@ -1,0 +1,17 @@
+def pascals_triangle(n):
+    i = 1
+    triangle = [[1]]
+    final_triangle = []
+    while i < n:
+        j = 0
+        row = [1]
+        while j < len(triangle[-1])-1:
+            row.append(triangle[-1][j]+triangle[-1][j+1])
+            j += 1
+        row.append(1)
+        triangle.append(row)
+        i += 1
+    for x in triangle:
+        for y in x:
+            final_triangle.append(y)
+    return final_triangle
