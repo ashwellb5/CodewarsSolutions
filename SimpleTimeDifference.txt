@@ -1,0 +1,25 @@
+def solve(arr):
+    arr.sort()
+    simplified_times = []
+    for x in arr:
+        split = x.split(":")
+        simplified_times.append(int(split[0]) * 60 + int(split[1]))
+    i = 0
+    max_difference = 0
+    while i < len(simplified_times)-1:
+        if simplified_times[i+1] - simplified_times[i] > max_difference:
+            max_difference = simplified_times[i+1] - simplified_times[i]-1
+        i += 1
+    if (60*24)-simplified_times[-1] + simplified_times[0] > max_difference:
+        max_difference =  (60*24)-simplified_times[-1] + simplified_times[0]-1
+    hours = str(max_difference//60)
+    minutes = str(max_difference%60)
+    final_time = ""
+    if len(hours) == 1:
+        final_time += "0"
+    final_time += hours
+    final_time += ":"
+    if len(minutes) == 1:
+        final_time += "0"
+    final_time += minutes
+    return final_time
