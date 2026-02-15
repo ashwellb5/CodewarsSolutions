@@ -1,0 +1,8 @@
+def binary_array_to_number(arr):
+    sum = 0
+    index = len(arr) - 1
+    for x in arr:
+        if x == 1:
+            sum += 2**index
+        index -= 1
+    return sum
