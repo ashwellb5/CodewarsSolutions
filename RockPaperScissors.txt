@@ -1,0 +1,10 @@
+def rps(p1, p2):
+    game = ["paper", "scissors", "rock"]
+    index1 = game.index(p1)
+    index2 = game.index(p2)
+    if p1 == p2:
+        return "Draw!"
+    elif index2 == (index1+2) % 3:
+        return "Player 1 won!"
+    else:
+        return "Player 2 won!"
