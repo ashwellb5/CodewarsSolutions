@@ -1,0 +1,10 @@
+def warn_the_sheep(queue):
+    queue.reverse()
+    print(queue)
+    index = 0
+    for x in queue:
+        if x == "wolf" and index == 0:
+            return "Pls go away and stop eating my sheep"
+        elif x == "wolf":
+            return "Oi! Sheep number " + str(index) + "! You are about to be eaten by a wolf!"
+        index += 1
