@@ -1,0 +1,8 @@
+def hello(name = ""):
+    try:
+        name
+    except:
+        return "Hello, World!"
+    if len(name) == 0:
+        return "Hello, World!"
+    return "Hello, " + name.lower().capitalize() + "!"
