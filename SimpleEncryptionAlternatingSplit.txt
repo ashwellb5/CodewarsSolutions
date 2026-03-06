@@ -1,0 +1,37 @@
+def decrypt(encrypted_text, n):
+    final_char = ""
+    if encrypted_text == None:
+        return None
+    elif len(encrypted_text) % 2 == 1:
+        final_char = encrypted_text[-1]
+        encrypted_text = encrypted_text[:-1]
+    while n > 0:
+        temp_text = ""
+        i = 0
+        while i < len(encrypted_text)/2:           
+            temp_text += encrypted_text[i+int(len(encrypted_text)/2)]
+            temp_text += encrypted_text[i]
+            i += 1
+        encrypted_text = temp_text
+        n -= 1
+    return encrypted_text + final_char
+def encrypt(text, n):
+    final_char = ""
+    if text == None:
+        return None
+    elif len(text) % 2 == 1:
+        final_char = text[-1]
+        text = text[:-1]
+    while n > 0:
+        even_text = ""
+        odd_text = ""
+        i = 0
+        while i < len(text):           
+            if i % 2 == 0:
+                odd_text += text[i]
+            else:
+                even_text += text[i]
+            i += 1
+        text = even_text + odd_text
+        n -= 1
+    return text + final_char
