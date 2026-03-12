@@ -1,0 +1,9 @@
+def find_missing(sequence):
+    difference = sequence[-1] - sequence[0]
+    adder = difference/len(sequence)
+    num = sequence[0] - adder
+    for x in sequence:
+        if num + adder != x:
+            return num + adder
+        else:
+            num = x
