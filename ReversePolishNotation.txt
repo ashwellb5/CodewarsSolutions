@@ -1,0 +1,35 @@
+def calc(expr):
+    items = expr.split(" ")
+    print(items)
+    while len(items) > 1:
+        print(items)
+        action = False
+        index = 0
+        numbers = []
+        for item in items:
+            if not action:
+                if item[0].isdigit():
+                    if len(numbers) < 2:
+                        numbers.append(item)
+                    else:
+                        numbers[0] = numbers[1]
+                        numbers[1] = item
+                elif not item.isdigit() and len(numbers) == 2:
+                    action = True
+                    if item == "+":
+                        items[index-2] = str(float(numbers[0]) + float(numbers[1]))
+                        del items[index-1:index+1]
+                    elif item == "-":
+                        items[index-2] = str(float(numbers[0]) - float(numbers[1]))
+                        del items[index-1:index+1]
+                    elif item == "*":
+                        items[index-2] = str(float(numbers[0]) * float(numbers[1]))
+                        del items[index-1:index+1]
+                    elif item == "/":
+                        items[index-2] = str(float(numbers[0]) / float(numbers[1]))
+                        del items[index-1:index+1]
+            index += 1            
+    if items[0] == "":
+        return 0
+    else:
+        return float(items[0])
