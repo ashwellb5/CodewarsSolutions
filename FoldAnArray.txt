@@ -1,0 +1,12 @@
+def fold_array(array, runs):
+    n = runs
+    temp = array
+    while n > 0:
+        if len(temp) % 2 == 0:
+            temp = [x + y for x, y in zip(temp[0:int(len(temp)/2)], temp[int(len(temp)/2):][::-1])]
+        else:
+            fold_point = temp[int(len(temp)/2)]
+            temp = [x + y for x, y in zip(temp[0:int(len(temp)/2)], temp[int(len(temp)/2)+1:][::-1])]
+            temp.append(fold_point)
+        n -= 1
+    return temp
