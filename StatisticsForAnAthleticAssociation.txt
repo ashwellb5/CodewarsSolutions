@@ -1,0 +1,35 @@
+import statistics
+def seconds_to_format(seconds):
+    minutes, s = divmod(seconds, 60)
+    h, m = divmod(minutes, 60)
+    return(f"{int(h):02d}|{int(m):02d}|{int(s):02d}")
+def stat(strg):
+    if strg == "":
+        return ""
+    max = 0
+    min = 10000000
+    time_list = []
+    for x in strg.split(", "):
+        i = 0
+        seconds = 0
+        for y in x.split("|"):
+            if i == 0:
+                seconds += int(y) * 3600
+            elif i == 1:
+                seconds += int(y) * 60
+            else:
+                seconds += int(y)
+            i += 1
+        if seconds > max:
+            max = seconds
+        if seconds < min:
+            min = seconds
+        time_list.append(seconds)
+
+    range = max - min
+    range = seconds_to_format(range)
+    average = sum(time_list) / len(time_list)
+    average = seconds_to_format(average)
+    median = statistics.median(time_list)
+    median = seconds_to_format(median)
+    return "Range: " + range + " Average: " + average + " Median: " + median
