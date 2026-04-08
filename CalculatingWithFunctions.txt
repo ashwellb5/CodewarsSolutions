@@ -1,0 +1,21 @@
+def operand_decider(num, operand):
+    if operand == None:
+        return num
+    if operand[0] == '+':
+        return num + operand[1]
+    elif operand[0] == '-':
+        return num - operand[1]
+    elif operand[0] == '*':
+        return num * operand[1]
+    elif operand[0] == '/':
+        return int(num / operand[1])
+def zero(operand = None): return operand_decider(0, operand)
+def one(operand = None): return operand_decider(1, operand)
+def two(operand = None): return operand_decider(2, operand)
+def three(operand = None): return operand_decider(3, operand)
+def four(operand = None): return operand_decider(4, operand)
+def five(operand = None): return operand_decider(5, operand)
+def six(operand = None): return operand_decider(6, operand)
+def seven(operand = None): return operand_decider(7, operand)
+def eight(operand = None): return operand_decider(8, operand)
+def nine(operand = None):return operand_decider(9, operand)
