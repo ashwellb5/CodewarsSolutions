@@ -1,0 +1,19 @@
+def validate(n):
+    n = str(n)[::-1]
+    n_list = []
+    for x in n:
+        n_list.append(int(x))
+    i = 0
+    n_list2 = []
+    for x in n_list:
+        if i % 2 == 1:
+            n_list2.append(x*2)
+        else:
+            n_list2.append(x)
+        i+=1
+    index = 0
+    while index < len(n_list2):
+        if n_list2[index] > 9:
+            n_list2[index] -= 9
+        index += 1
+    return sum(n_list2) % 10 == 0
