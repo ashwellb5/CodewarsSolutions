@@ -1,0 +1,11 @@
+def solve(s):
+    if s[:-(-len(s)//2)] == s[int(len(s)/2):][::-1]:
+        return "OK"
+    else:
+        for i in range(len(s)):
+            temp = s[:i] + s[i + 1:]
+            if temp[:-(-len(temp)//2)] == temp[int(len(temp)/2):][::-1]:
+                return "remove one"
+    return "not possible"
+
+        
