@@ -1,0 +1,16 @@
+def to_underscore(strng: str) -> str:
+    strng = str(strng)
+    words = []
+    temp = ""
+    for x in strng:
+        if x.isupper() and temp != "":
+            words.append(temp)
+            temp = x
+        else:
+            temp += x
+    words.append(temp)
+    snake_case = ""
+    for x in words:
+        snake_case += x
+        snake_case += "_"
+    return snake_case.lower()[:-1]
