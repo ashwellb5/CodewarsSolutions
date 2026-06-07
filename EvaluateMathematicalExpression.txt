@@ -1,0 +1,130 @@
+def find_expression(exp):
+    operators = ["+", "-", "*","/"] 
+    mult_divide = False
+    if "*" in exp or "/" in exp:
+        mult_divide = True
+    num1 = ""
+    num2 = ""
+    negate = ""
+    operator = ""
+    num1bool = False
+    num2bool = False
+    index = 0
+    start_index = -1
+    end_index = -1
+    for x in exp:
+        if x.isdigit() or x == ".":
+            if num1 == "" or num1bool == True:
+                if start_index == -1:
+                    if negate == "-":
+                        start_index = index - 1
+                    else:
+                        start_index = index
+                num1 += negate + x
+                num1bool = True
+            elif num2 == "" or num2bool == True:
+                num2 += negate + x
+                num2bool = True
+            negate = ""
+        elif (x == "-" and negate == "") and ((operator != "" or num1 == "") and num2 == ""):
+            negate = "-"
+        elif x in operators and operator == "":
+            if mult_divide and (x == "+" or x == "-"):
+                num1 = ""
+                num2 = ""
+                start_index = -1
+            else:
+                operator = x
+            negate = ""
+            num1bool = False
+            num2bool = False
+        else:
+            if (num1 != "" and num2 != "") and end_index == -1:
+                end_index = index
+            negate = ""
+            num1bool = False
+            num2bool = False
+        index += 1
+    if end_index == -1:
+        end_index = index
+    return [num1, num2, operator, start_index, end_index]
+
+def simple_expression(exp):
+    if exp[2] == "+":
+        return float(exp[0]) + float(exp[1])
+    elif exp[2] == "-":
+        return float(exp[0]) - float(exp[1])
+    elif exp[2] == "*":
+        return float(exp[0]) * float(exp[1])
+    elif exp[2] == "/":
+        return float(exp[0]) / float(exp[1])
+    
+def calc(expression):
+    operators = ["+","*","/"] 
+    print(expression)
+    left_paren = -1
+    right_paren = -1
+    while "(" in expression:
+        index = 0
+        for x in expression:
+            if x == "(":
+                left_paren = index
+            if x == ")" and left_paren != -1:
+                right_paren = index
+                break
+            index += 1
+        temp_exp = expression[left_paren + 1: right_paren]
+        print(temp_exp)
+        if "--" in temp_exp:
+                temp = temp_exp.replace("--", "+")
+                temp_exp = temp
+        temp = temp_exp.strip("+")
+        temp_exp = temp
+        while temp_exp.count("-") > 1 or  any(char in temp_exp for char in operators):
+            found_exp = find_expression(temp_exp)
+            temp_exp = temp_exp[:found_exp[3]] + str(simple_expression(found_exp)) + temp_exp[found_exp[4]:]
+            print(temp_exp)
+            temp_exp.strip("+")
+        if "--" in temp_exp:
+            temp = temp_exp.replace("--", "+")
+            temp_exp = temp
+            temp = temp_exp.strip("+")
+            temp_exp = temp
+        if "-" in temp_exp and not temp_exp.count("-") > 1:
+            split = temp_exp.split("-")
+            if len(split[0]) > 0 and len(split[1]) > 0:
+                found_exp = find_expression(temp_exp)
+                temp_exp = temp_exp[:found_exp[3]] + format(simple_expression(found_exp), '.30f') + temp_exp[found_exp[4]:]
+        expression = expression[:left_paren] + temp_exp + expression[right_paren+1:]
+        if "--" in expression:
+            temp = expression.replace("--", "+")
+            expression = temp
+        temp = expression.strip("+")
+        expression = temp
+        print("!_!")
+        print(expression)
+        left_paren = -1
+        right_paren = -1
+    while expression.count("-") > 1 or  any(char in expression for char in operators):
+        found_exp = find_expression(expression)
+        expression = expression[:found_exp[3]] + format(simple_expression(found_exp), '.30f') + expression[found_exp[4]:]
+        print(expression)      
+        if "--" in expression:
+            temp = expression.replace("--", "")
+            expression = temp
+        temp = expression.strip("+")
+        expression = temp
+    if "--" in expression:
+        temp = expression.replace("--", "")
+        expression = temp
+    
+    temp = expression.strip("+")
+    expression = temp
+    
+    if "-" in expression:
+        split = expression.split("-")
+        if len(split[0]) > 0 and len(split[1]) > 0:
+            found_exp = find_expression(expression)
+            expression = expression[:found_exp[3]] + format(simple_expression(found_exp), '.30f') + expression[found_exp[4]:]
+    return float(expression)
+            
