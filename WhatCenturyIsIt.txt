@@ -1,0 +1,15 @@
+def what_century(year):
+    special_cases =  {
+        "1": "st",
+        "2": "nd",
+        "3": "rd"
+    }
+    century = str(int(year[:2])+1)
+    if year[2:] == "00":
+        century = str(int(century) - 1)
+    if int(century) < 21:
+        return century + "th"
+    elif century[1] in special_cases:
+        return century + special_cases[century[1]]
+    else:
+        return century + "th"
