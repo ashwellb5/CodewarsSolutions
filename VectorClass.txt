@@ -1,0 +1,54 @@
+class Vector:
+    
+    def __init__(self, coordinates: list):
+        self.coordinates = coordinates
+        
+    def add(self, coords):
+        return_vector = Vector(self.coordinates.copy())
+        if len(return_vector.coordinates) == len(coords.coordinates):
+            for i in range(len(return_vector.coordinates)):
+                print(return_vector.coordinates)
+                return_vector.coordinates[i] += coords.coordinates[i]
+            return return_vector
+        else:
+            raise Exception("Length of vectors does not match")
+            
+    def subtract(self, coords):
+        return_vector = Vector(self.coordinates.copy())
+        if len(return_vector.coordinates) == len(coords.coordinates):
+            for i in range(len(return_vector.coordinates)):
+                print(return_vector.coordinates)
+                return_vector.coordinates[i] -= coords.coordinates[i]
+            return return_vector
+        else:
+            raise Exception("Length of vectors does not match")
+            
+    def dot(self, coords):
+        total = 0
+        if len(self.coordinates) == len(coords.coordinates):
+            for i in range(len(self.coordinates)):
+                total += self.coordinates[i] * coords.coordinates[i]
+            return total
+        else:
+            raise Exception("Length of vectors does not match")
+    
+    def norm(self):
+        new_vector = Vector(self.coordinates.copy())
+        new_vector.coordinates = [x ** 2 for x in new_vector.coordinates]
+        total = sum(new_vector.coordinates)
+        return total ** 0.5
+    
+    def equals(self, coords):
+        if len(self.coordinates) == len(coords.coordinates):
+            for i in range(len(self.coordinates)):
+                if self.coordinates[i] != coords.coordinates[i]:
+                    return False
+            return True
+        else:
+            return False
+        
+    def __str__(self):
+        vector_string = "("
+        for x in self.coordinates:
+            vector_string += str(x) + ","
+        return vector_string[:-1] + ")"
