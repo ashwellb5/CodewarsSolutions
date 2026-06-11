@@ -1,0 +1,13 @@
+def matrix_mult(a: list[list[int]], b: list[list[int]]) -> list[list[int]]:
+    c = []
+    i = 0
+    transpose_b = list(map(list, zip(*b)))   
+    for x in a:
+        row = []
+        j = 0
+        for y in x:
+            row.append(sum(x * y for x, y in zip(a[i], transpose_b[j])))
+            j += 1
+        c.append(row)
+        i += 1
+    return c
