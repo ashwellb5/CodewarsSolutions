@@ -1,0 +1,10 @@
+class Event():
+    def __init__(self):
+        self.functions = []
+    def subscribe(self, new_function):
+        self.functions.append(new_function)
+    def unsubscribe(self, function_to_delete):
+        self.functions.remove(function_to_delete)
+    def emit(self, *args):
+        for x in self.functions:
+            x(*args)
